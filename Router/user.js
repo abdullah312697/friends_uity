@@ -1,4 +1,3 @@
-const { verifyToken } = require('./varifyToken');
 const router = require('express').Router();
 const model = require('../models/Users');
 
@@ -94,7 +93,7 @@ router.get("/gtAlluData", async(req, res) => {
 
 //<get monthlyData>
 
-router.post("/phistory", verifyToken, async(req, res) => {
+router.post("/phistory", async(req, res) => {
     try {
         const fdata = await model.Paydate.find({ payForMonth: req.body.month, payForYear: req.body.year });
 
@@ -110,7 +109,7 @@ router.post("/phistory", verifyToken, async(req, res) => {
 //</get monthlyData>
 //<get pament History>
 
-router.post("/getPhistory/:id", verifyToken, async(req, res) => {
+router.post("/getPhistory/:id", async(req, res) => {
 
     try {
 

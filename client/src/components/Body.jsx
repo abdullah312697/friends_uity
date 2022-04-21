@@ -75,7 +75,9 @@ useEffect(() => {
         const getLate = async () => {
             await axiosInst.get("users/getAmout").then(res => {
                 if(isMounted){
-                    SetShowamout(res.data);
+                    setTimeout(() => {
+                        SetShowamout(res.data);
+                    },3000);
                 }
             }).catch(e => {
                 console.log(e);
