@@ -4,6 +4,7 @@
     "description": "for all friends future",
     "main": "server.js",
     "scripts": {
+        "test": "nodemon server.js",
         "start": "node server.js",
         "heroku-postbuild": "cd client && npm install && npm run build"
     },
