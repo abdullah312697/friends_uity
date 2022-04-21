@@ -12,22 +12,28 @@ const MobileHeader = () => {
     const [userNotify, setNofity] = useState([]);
 
     useEffect(() => {
-
-        axiosInst.get("auth/vfyUser").then(res => {
+    const getLate = async () => {
+        await axiosInst.get("auth/vfyUser").then(res => {
             SetuserData(res.data);
         }).catch(e => {
             console.log(e);
         });
+    };
+    getLate();
+
     },[]);
     
 
     useEffect(() => {
-        axiosInst.get("users/confirmPayment").then(res => {
-            setNofity(res.data);
-        }).catch(e => {
-            console.log(e);
-        });
-    
+            const getLate = async () => {
+                await axiosInst.get("users/confirmPayment").then(res => {
+                    setNofity(res.data);
+                }).catch(e => {
+                    console.log(e);
+                });
+            };
+    getLate();
+
     }, []);
 
     const logOutUser = async() => {

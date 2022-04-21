@@ -18,63 +18,124 @@ const Body = () => {
     const [showAmout, SetShowamout] = useState({});
 
 useEffect(() =>{
-    axiosInst.get("users/findRguser").then(res => {
-        res.data.map(async (d) => {
-            await axiosInst.delete("users/delete/"+d._id).then(res => {
-                console.log(res.data);
+    let isMounted = true;
+        const getLate = async () => {
+            await axiosInst.get("users/findRguser").then(res => {
+                res.data.map(async (d) => {
+                    await axiosInst.delete("users/delete/"+d._id).then(res => {
+                        if(isMounted){
+                            console.log(res.data);
+                        }
+                    }).catch(e => {
+                        console.log(e);
+                    });
+                    return false;
+                });
             }).catch(e => {
                 console.log(e);
             });
-            return false;
-        });
-    }).catch(e => {
-        console.log(e);
-    });
+        
+        };
+    getLate();
+
+        return () => {
+            isMounted = false;
+            };
+
+
 },[userData]);
 
     useEffect(() => {
-        axiosInst.get("auth/vfyUser").then(res => {
-            let gotohome = document.getElementById("goto_home");
-            if(res.data === ""){
-                gotohome.click();
-            }else{
-                setAuthUser(res.data);
-            }
-        }).catch(e => {
-            console.log(e);
-        });
+        let isMounted = true;
+
+            const getLate = async () => {
+                await axiosInst.get("auth/vfyUser").then(res => {
+                    let gotohome = document.getElementById("goto_home");
+                    if(isMounted){
+                        if(res.data === ""){
+                            gotohome.click();
+                        }else{
+                            setAuthUser(res.data);
+                        }    
+                    }
+                }).catch(e => {
+                    console.log(e);
+                });
+        
+            };
+    getLate();
+    return () => {
+        isMounted = false;
+        };
+
     },[]);
 
 useEffect(() => {
-    axiosInst.get("users/getAmout").then(res => {
-        SetShowamout(res.data);
-    }).catch(e => {
-        console.log(e);
-    });
+    let isMounted = true;
+        const getLate = async () => {
+            await axiosInst.get("users/getAmout").then(res => {
+                if(isMounted){
+                    SetShowamout(res.data);
+                }
+            }).catch(e => {
+                console.log(e);
+            });
+        
+        };
+    getLate();
+    return () => {
+        isMounted = false;
+        };
+
 }, []);
 
 
 useEffect(() => {
-    axiosInst.get("users/gtAlluData").then(res => {
-        SetUserData(res.data);
-    }).catch(e => {
-        console.log(e);
-    });
+    let isMounted = true;
+        const getLate = async () => {
+            await axiosInst.get("users/gtAlluData").then(res => {
+                if(isMounted){
+                    SetUserData(res.data);
+                }
+            }).catch(e => {
+                console.log(e);
+            });
+        
+        };
+    getLate();
+    return () => {
+        isMounted = false;
+        };
+
 
 },[]);
     
  useEffect(() => {
 
-    const dataSend = {
-        year : showYear,
-        month :showMonth
+    let isMounted = true;
+
+    const lateLoad = async() => {
+        const dataSend = {
+            year : showYear,
+            month :showMonth
+        };
+    
+        await axiosInst.post("users/phistory", dataSend).then(res => {
+            if(isMounted){
+                SetPayData(res.data);
+            }
+        }).catch(e => {
+            console.log(e);
+        });
+
     };
 
-    axiosInst.post("users/phistory", dataSend).then(res => {
-        SetPayData(res.data);
-    }).catch(e => {
-        console.log(e);
-    });
+    lateLoad();
+
+    return () => {
+        isMounted = false;
+        };
+
 
  },[showMonth, showYear]);
 

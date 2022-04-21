@@ -5,20 +5,26 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {axiosInst} from './../altaxios';
 
 const Voucher = () => {
+
         const getYear = new Date().getFullYear();
 
         const [showYear, setShowYear] = useState(getYear);
         const [userData, setUserData] = useState([]);
 
         useEffect(() => {
-            axiosInst.get("auth/vfyUser").then(res => {
-                let gotohome = document.getElementById("goto_home");
-                if(res.data === ""){
-                    gotohome.click();
-                }
-            }).catch(e => {
-                console.log(e);
-            });
+                const getLate = async () => {
+                   await axiosInst.get("auth/vfyUser").then(res => {
+                        let gotohome = document.getElementById("goto_home");
+                        if(res.data === ""){
+                            gotohome.click();
+                        }
+                    }).catch(e => {
+                        console.log(e);
+                    });
+        
+                };
+    getLate();
+
         },[]);
     
     
@@ -26,13 +32,18 @@ const Voucher = () => {
 
 
         useEffect(() => {
-            let path = window.location.pathname.split('/')[2];
+                const getLate = async () => {
+                    let path = window.location.pathname.split('/')[2];
 
-            axiosInst.post("users/getPhistory/" + path, {year: showYear} ).then(res => {
-                setUserData(res.data);
-            }).catch(e => {
-                console.log(e);
-            });
+                   await axiosInst.post("users/getPhistory/" + path, {year: showYear} ).then(res => {
+                        setUserData(res.data);
+                    }).catch(e => {
+                        console.log(e);
+                    });
+        
+                };
+    getLate();
+
         
         }, [showYear]);
 

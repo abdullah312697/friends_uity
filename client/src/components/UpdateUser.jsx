@@ -16,14 +16,19 @@ const UpdateUser = () => {
 
 
     useEffect(() => {
-        axiosInst.get("auth/vfyUser").then(res => {
-            let gotohome = document.getElementById("goto_home");
-            if(res.data === ""){
-                gotohome.click();
-            }
-        }).catch(e => {
-            console.log(e);
-        });
+            const getLate = async () => {
+               await axiosInst.get("auth/vfyUser").then(res => {
+                    let gotohome = document.getElementById("goto_home");
+                    if(res.data === ""){
+                        gotohome.click();
+                    }
+                }).catch(e => {
+                    console.log(e);
+                });
+        
+            };
+    getLate();
+
     },[]);
 
 
@@ -35,11 +40,11 @@ const UpdateUser = () => {
     };
 
 
-    const updateUsrData = (e) => {
+    const updateUsrData = async(e) => {
         const url = "users/update/" + path;
         e.preventDefault();
         const gotHome = document.querySelector(".backHome");
-        axiosInst.put(url,userData).then(res => {
+        await axiosInst.put(url,userData).then(res => {
             if(res.status !== 200){
                 setShowmsg(res.data);
                 setShowmsgStyl({opacity : 1, color:"#ff0000"});
@@ -61,12 +66,17 @@ const UpdateUser = () => {
     };
 
     useEffect(() => {
-        const url = "users/profile/" + path;
-         axiosInst.get(url).then(res => {
-            setUserData(res.data);
-        }).catch(e => {
-            console.log(e);
-        });    
+            const getLate = async () => {
+                const url = "users/profile/" + path;
+                await axiosInst.get(url).then(res => {
+                   setUserData(res.data);
+               }).catch(e => {
+                   console.log(e);
+               });    
+       
+            };
+    getLate();
+
     
     }, [path]);
     

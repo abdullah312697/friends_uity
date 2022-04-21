@@ -9,29 +9,37 @@ import {axiosInst} from './../altaxios';
 
 const User = () => {
 const [userData, setUserData] = useState({});
-
-
 useEffect(() => {
-    axiosInst.get("auth/vfyUser").then(res => {
-        let gotohome = document.getElementById("goto_home");
-        if(res.data === ""){
-            gotohome.click();
-        }
-    }).catch(e => {
-        console.log(e);
-    });
+        const getLate = async () => {
+            await axiosInst.get("auth/vfyUser").then(res => {
+                let gotohome = document.getElementById("goto_home");
+                if(res.data === ""){
+                    gotohome.click();
+                }
+            }).catch(e => {
+                console.log(e);
+            });
+        
+        };
+    getLate();
+
 },[]);
 
 
 
 useEffect(() => {
-    const path = window.location.pathname.split('/')[2];
-    const url = "users/profile/" + path;
-     axiosInst.get(url).then(res => {
-        setUserData(res.data);
-    }).catch(e => {
-        console.log(e);
-    });    
+        const getLate = async () => {
+            const path = window.location.pathname.split('/')[2];
+            const url = "users/profile/" + path;
+             await axiosInst.get(url).then(res => {
+                setUserData(res.data);
+            }).catch(e => {
+                console.log(e);
+            });    
+        
+        };
+    getLate();
+
 
 }, []);
 /*jshint ignore : start*/

@@ -10,35 +10,44 @@ const ConfirmPament = () => {
     const [getUdata, setCondata] = useState({});
 
     useEffect(() => {
-        axiosInst.get("auth/vfyUser").then(res => {
-            let gotohome = document.getElementById("goto_home");
-            if(res.data === ""){
-                gotohome.click();
-            }else{
-                if(res.data.isAdmin !== true || res.data.isEditor !== true){
-                    window.location = "/home";
-                }
-            }
-        }).catch(e => {
-            console.log(e);
-        });
+            const getLate = async () => {
+               await axiosInst.get("auth/vfyUser").then(res => {
+                    let gotohome = document.getElementById("goto_home");
+                    if(res.data === ""){
+                        gotohome.click();
+                    }else{
+                        if(res.data.isAdmin !== true || res.data.isEditor !== true){
+                            window.location = "/home";
+                        }
+                    }
+                }).catch(e => {
+                    console.log(e);
+                });
+        
+            };
+    getLate();
+
     },[]);
 
 
 
     useEffect(() => {
-        axiosInst.get("users/confirmPayment").then(res => {
-            setUserData(res.data);
-        }).catch(e => {
-            console.log(e);
-        });
-    
+            const getLate = async () => {
+               await axiosInst.get("users/confirmPayment").then(res => {
+                    setUserData(res.data);
+                }).catch(e => {
+                    console.log(e);
+                });
+                
+            };
+    getLate();
+
     }, [getUdata]);
 
     
-    const confirmPay = (e) => {
+    const confirmPay = async(e) => {
         const ConId = e.target.id;
-        axiosInst.put("users/updatePay/"+ConId).then(res => {
+        await axiosInst.put("users/updatePay/"+ConId).then(res => {
             setCondata(res.data);
         }).catch(e => {
             console.log(e);

@@ -7,8 +7,8 @@ import {axiosInst} from './../altaxios';
 const OuterHeader = () => {
 
     useEffect(() => {
-
-        axiosInst.get("auth/vfyUser").then(res => {
+    const getLate = async () => {
+        await axiosInst.get("auth/vfyUser").then(res => {
             let gotohome = document.getElementById("goto_home");
             if(res.data !== ""){
                 gotohome.click();
@@ -16,6 +16,9 @@ const OuterHeader = () => {
         }).catch(e => {
             console.log(e);
         });
+    };
+    getLate();
+
     },[]);
 
 

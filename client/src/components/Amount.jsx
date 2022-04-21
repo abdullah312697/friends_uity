@@ -15,32 +15,41 @@ const Amount = () => {
     const getAmout = (e) => {
         SetShowamout({...showAmout , "amount" : parseInt(e.target.value)});
     };
+
     useEffect(() => {
-        axiosInst.get("auth/vfyUser").then(res => {
-            let gotohome = document.getElementById("goto_home");
-            if(res.data === ""){
-                gotohome.click();
-            }else{
-                if(res.data.isAdmin !== true || res.data.isEditor !== true){
-                    window.location = "/home";
+        const getLate = async () => {
+            await axiosInst.get("auth/vfyUser").then(res => {
+                let gotohome = document.getElementById("goto_home");
+                if(res.data === ""){
+                    gotohome.click();
+                }else{
+                    if(res.data.isAdmin !== true || res.data.isEditor !== true){
+                        window.location = "/home";
+                    }
                 }
-            }
-        }).catch(e => {
-            console.log(e);
-        });
+            }).catch(e => {
+                console.log(e);
+            });
+    
+        };
+        getLate();
     },[]);
 
 useEffect(() => {
-    axiosInst.get("users/getAmout").then(res => {
-        SetShowamout(res.data);
-    }).catch(e => {
-        console.log(e);
-    });
+        const getLate = async () => {
+            await axiosInst.get("users/getAmout").then(res => {
+                SetShowamout(res.data);
+            }).catch(e => {
+                console.log(e);
+            });        
+        };
+    getLate();
+
 }, []);
 
-    const SetAmount = (e) => {
+    const SetAmount = async(e) => {
         e.preventDefault();
-        axiosInst.put("users/updateAmout/" + showAmout.amount ).then(res => {
+        await axiosInst.put("users/updateAmout/" + showAmout.amount ).then(res => {
             if(res.status === 200){
                 SetShowamout(res.data);
                 setShowmsg("Update Successfull!");

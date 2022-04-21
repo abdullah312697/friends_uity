@@ -9,26 +9,45 @@ import {axiosInst} from './../altaxios';
 const Header = () => {
 
     const [userData,SetuserData] = useState({});
-
     const [userNotify, setNofity] = useState([]);
     
 
     useEffect(() => {
-        axiosInst.get("users/confirmPayment").then(res => {
-            setNofity(res.data);
-        }).catch(e => {
-            console.log(e);
-        });
-    
+        let isMounted = true;
+
+        const setLoad = async() => {
+            await axiosInst.get("users/confirmPayment").then(res => {
+                if(isMounted){
+                    setNofity(res.data);
+                }
+            }).catch(e => {
+                console.log(e);
+            });    
+        };
+        setLoad();
+        return () => {
+            isMounted = false;
+            };
+
     }, []);
-
     useEffect(() => {
+        let isMounted = true;
+        const sendLate = async() => {
+            await axiosInst.get("auth/vfyUser").then(res => {
+                if(isMounted){
+                    SetuserData(res.data);
+                }
+            }).catch(e => {
+                console.log(e);
+            });
+    
+        };
+        sendLate();
 
-        axiosInst.get("auth/vfyUser").then(res => {
-            SetuserData(res.data);
-        }).catch(e => {
-            console.log(e);
-        });
+        return () => {
+            isMounted = false;
+            };
+
     },[]);
 
 
@@ -40,8 +59,8 @@ const Header = () => {
         });
 
     };
-
     useEffect(() => {
+
         const path = window.location.pathname;
         const main = path.split('/')[1];
         const route = document.getElementById(main);

@@ -5,22 +5,26 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {Link} from 'react-router-dom';
 
 const Payments = () =>{
-
     const [userData, setUserData] = useState({});
     const mName = new Date().getFullYear();
     const [shwomsg, setShowmsg] = useState("");
     const [shwomsgStyl, setShowmsgStyl] = useState({});
 
     useEffect(() => {
-        axiosInst.get("auth/vfyUser").then(res => {
-            if(res.data === ""){
-                window.location = "/login";
-            }else{
-                setUserData(res.data);
-            }
-        }).catch(e => {
-            console.log(e);
-        });
+            const getLate = async () => {
+                await axiosInst.get("auth/vfyUser").then(res => {
+                    if(res.data === ""){
+                        window.location = "/login";
+                    }else{
+                        setUserData(res.data);
+                    }
+                }).catch(e => {
+                    console.log(e);
+                });
+        
+            };
+    getLate();
+
     },[]);
 
 const [payData, SetPayData] = useState({
@@ -82,9 +86,9 @@ const getPData = (e) => {
     SetPayData(data);
 };
 
-const sendData = (e) => {
+const sendData = async(e) => {
     e.preventDefault();
-    axiosInst.post("auth/addPayment",payData).then(res => {
+    await axiosInst.post("auth/addPayment",payData).then(res => {
         if(res.status !== 200){
         setShowmsg(res.data);
         setShowmsgStyl({opacity : 1, color:"#ff0000"});
