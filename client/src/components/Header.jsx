@@ -8,8 +8,6 @@ import {axiosInst} from './../altaxios';
 
 const Header = () => {
 
-    const setHeader = new Headers();
-    setHeader.set({"content-type":"application/javascript"});
     const [userData,SetuserData] = useState({});
 
     const [userNotify, setNofity] = useState([]);
