@@ -34,7 +34,9 @@ const ConfirmPament = () => {
     useEffect(() => {
             const getLate = async () => {
                await axiosInst.get("users/confirmPayment").then(res => {
-                    setUserData(res.data);
+                   if(res.status === 200){
+                        setUserData(res.data);
+                   }
                 }).catch(e => {
                     console.log(e);
                 });
@@ -67,7 +69,15 @@ const ConfirmPament = () => {
         </vs.vfirstSec>
 
         <vs.vsecondSec>
-                {userData.map(d => (
+                {
+                userData.length === 0 ?
+                
+                
+                <vs.DataShow> Data not available! </vs.DataShow> 
+                
+                :
+                
+                userData.map(d => (
                             <vs.vuserHist key={d._id}>
                             <vs.vuserHinner>
                                 <vs.ShowConDiv><vs.UsrImg src={d.userProfile}/> <vs.UnameSp>{d.payerName}</vs.UnameSp></vs.ShowConDiv>

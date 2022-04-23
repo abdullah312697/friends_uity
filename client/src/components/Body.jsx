@@ -74,7 +74,7 @@ useEffect(() => {
     let isMounted = true;
         const getLate = async () => {
             await axiosInst.get("users/getAmout").then(res => {
-                if(isMounted){
+                if(res.status === 200 && isMounted){
                     SetShowamout(res.data);
                 }
             }).catch(e => {
@@ -299,13 +299,19 @@ useEffect(() => {
                         </B.incDecP>
                     </B.inputForm>
                 </B.InnerFchild>
-                <B.Allamount>
-                    {
+
+                {
                     Object.keys(showAmout).length === 0 ?
+                    <B.Allamount>
+
                     <B.AlluserATitle>
                         Amount Loading...
-                    </B.AlluserATitle>                    
+                    </B.AlluserATitle>
+                    </B.Allamount>
+                 
                     :
+                <B.Allamount>
+                    {
                         <B.AlluserATitle>
                             Our Total Amount {showAmout.amount} Taka
                         </B.AlluserATitle>
@@ -318,6 +324,8 @@ useEffect(() => {
                         
 
                 </B.Allamount>
+
+            }
                 <B.TotalMember>
                     <B.OurTtitle>Total Members {userData.length}</B.OurTtitle>
                 </B.TotalMember>

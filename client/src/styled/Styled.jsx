@@ -231,7 +231,6 @@ export const HStyle = {
 };
 
 export const Bodystyle = {
-
     mainParent: styled.div `
     width: 100%;
     position: relative;
@@ -1277,6 +1276,12 @@ export const voucherStyle = {
         flex-direction: column;
         box-sizing: border-box;
         padding: 25px;
+    `,
+    DataShow: styled.div `
+        color: #ff0052,
+        fontSize: 28px,
+        textAlign: center,
+        display: block
     `,
     voucherHeadr: styled.div `
         margin: 50px 0px;

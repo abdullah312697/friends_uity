@@ -36,7 +36,9 @@ const Voucher = () => {
                     let path = window.location.pathname.split('/')[2];
 
                    await axiosInst.post("users/getPhistory/" + path, {year: showYear} ).then(res => {
-                        setUserData(res.data);
+                       if(res.status === 200){
+                            setUserData(res.data);
+                       }
                     }).catch(e => {
                         console.log(e);
                     });
@@ -94,7 +96,12 @@ const Voucher = () => {
             </vs.vfirstSec>
 
             <vs.vsecondSec>
-                    {userData.map(d => (
+            {userData.length === 0 ? 
+            
+            <vs.DataShow> Data not available! </vs.DataShow> 
+            : 
+
+                    userData.map(d => (
                                 <vs.vuserHist key={d._id}>
                                 <vs.vuserHinner>
                                     <vs.vsuMname> {d.payForMonth} </vs.vsuMname>
@@ -105,7 +112,6 @@ const Voucher = () => {
                                 </vs.vuserHinner>
                                 </vs.vuserHist>    
                     ))}
-                   
             <Link to="/login" style={{display:"none"}} id="goto_home">login</Link>
 
             </vs.vsecondSec>

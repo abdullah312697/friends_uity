@@ -5,7 +5,7 @@ import Body from '../components/Body';
 const Home = () => {
     /* jshint ignore : start*/
     return(
-        <div>
+        <div style={{transition: '0.5s'}}>
             <Header/>
             <Body/>
         </div>
