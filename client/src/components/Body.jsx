@@ -75,9 +75,7 @@ useEffect(() => {
         const getLate = async () => {
             await axiosInst.get("users/getAmout").then(res => {
                 if(isMounted){
-                    setTimeout(() => {
-                        SetShowamout(res.data);
-                    },3000);
+                    SetShowamout(res.data);
                 }
             }).catch(e => {
                 console.log(e);
@@ -302,9 +300,17 @@ useEffect(() => {
                     </B.inputForm>
                 </B.InnerFchild>
                 <B.Allamount>
+                    {
+                    Object.keys(showAmout).length === 0 ?
+                    <B.AlluserATitle>
+                        Amount Loading...
+                    </B.AlluserATitle>                    
+                    :
                         <B.AlluserATitle>
-                        Our Total Amount {showAmout.amount} Taka
+                            Our Total Amount {showAmout.amount} Taka
                         </B.AlluserATitle>
+
+                    }
                         {
                         authUser.isAdmin === true || authUser.isEditor === true ?
                             <Link to="/updateAmount" className="hrefAmount">Update</Link>  : ""
@@ -398,12 +404,12 @@ useEffect(() => {
 
             <B.mainSecond>
                 <B.Monthp>
-                    <B.Mnheading>Users {userData.length}</B.Mnheading>
+                    <B.Mnheading>Users {userData.length - 1}</B.Mnheading>
                 </B.Monthp>
                 <B.userPerents>
                 { 
                     userData.map(d =>
-                        d.registerd === false ? "" : 
+                        d.registerd === false || d._id === authUser.id ? "" : 
                         <B.UserDetails key={d._id}>
                         <B.userImg src={d.profile ? d.profile : user}/>
                         <B.userName>

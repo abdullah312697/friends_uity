@@ -219,6 +219,15 @@ export const HStyle = {
         right: 69px;    
     }
      `,
+    UserSimg: styled.img `
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #00c42e;
+    padding: 3px;
+         `,
+
 };
 
 export const Bodystyle = {
@@ -803,7 +812,7 @@ export const RagistationStyle = {
     border-radius: 5px;
     font-size: 17px;
     position: absolute;
-    bottom: 112px;
+    bottom: 102px;
     opacity:0;
     transition:all 0.5s;
     `,
@@ -942,7 +951,7 @@ export const RagistationStyle = {
         width:50px;
         height:50px;
         border-radius:3px;
-        margin-bottom:26px;
+        margin-bottom:35px;
     `,
     RgformSubmit: styled.input `
         width: 100px;

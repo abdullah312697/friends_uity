@@ -81,7 +81,6 @@ const Header = () => {
                   <H.Nabbarlist>
                     <Link to="/home" className="navRoute" id="home">Home <H.borderbtm className="showborder"></H.borderbtm></Link>
                     <Link to="/about" className="navRoute" id="about">About <H.borderbtm className="showborder"></H.borderbtm></Link>
-                    <Link to={userData.id ? "/profile/"+userData.id : "/profile"} className="navRoute" id="profile">Profile <H.borderbtm className="showborder"></H.borderbtm></Link>
                     <Link to={userData.id ? "/voucher/"+userData.id : "/voucher"} className="navRoute" id="voucher">Voucher <H.borderbtm className="showborder"></H.borderbtm></Link>
                     <Link to="/payment" className="navRoute" id="payment">Pay-Installment<H.borderbtm className="showborder"></H.borderbtm></Link>
                     {userData.isAdmin === true || userData.isEditor === true ?
@@ -90,6 +89,12 @@ const Header = () => {
                 }
                 </H.Nabbarlist>
             </H.Nabbar>
+            {userData.profile ?
+                <Link to={userData.id ? "/profile/"+userData.id : "/profile"} onClick={() => {window.reload()}}>
+                <H.UserSimg src={userData.profile ? userData.profile : ""}/>
+                </Link>            
+            : ""}
+
             <Link className="loginBtn" onClick={logOutUser}  to="/login">LogOut</Link>
         </H.DesktopHeader>
             <H.MobileHeader className="MobileHeader">

@@ -21,10 +21,14 @@ app.use(cookieParser());
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 
-app.use(express.static("client/build"));
+app.use(express.static(path.join(__dirname, './client/build')));
+
+// app.use(express.static('client/build'));
+// res.sendFile(path.resolve(__dirname, "./client", "build", "index.html"));
 
 app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+
 });
 
 

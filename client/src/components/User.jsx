@@ -9,12 +9,15 @@ import {axiosInst} from './../altaxios';
 
 const User = () => {
 const [userData, setUserData] = useState({});
+const [localUsr,setLocalUser] = useState({});
 useEffect(() => {
         const getLate = async () => {
             await axiosInst.get("auth/vfyUser").then(res => {
                 let gotohome = document.getElementById("goto_home");
                 if(res.data === ""){
                     gotohome.click();
+                }else{
+                    setLocalUser(res.data);
                 }
             }).catch(e => {
                 console.log(e);
@@ -116,7 +119,7 @@ useEffect(() => {
                         <v.tableData> <v.tableName>Nominee-Name :</v.tableName> <v.tableInfo>{userData.nomineename}</v.tableInfo> </v.tableData>
                     </v.tableRow>
                     <v.tableRow>
-                        <v.tableData> <v.tableName>Nominee-Fother-Name :</v.tableName> <v.tableInfo>{userData.nomineeFathername}</v.tableInfo> </v.tableData>
+                        <v.tableData> <v.tableName>Nominee-Father-Name :</v.tableName> <v.tableInfo>{userData.nomineeFathername}</v.tableInfo> </v.tableData>
                     </v.tableRow>
                     <v.tableRow>
                         <v.tableData> <v.tableName>Nominee-Mother-Name :</v.tableName> <v.tableInfo>{userData.nomineeMothername}</v.tableInfo> </v.tableData>
@@ -131,7 +134,10 @@ useEffect(() => {
             </v.userInfo>
             <v.btnParent>
                 <Link to="/home" className="backHome"> <ArrowBackIcon/> Back </Link>
+                {localUsr.id === userData._id ?
                 <Link to={"/update/" + userData._id} className="goUpdate"> Update <UpdateIcon/></Link>
+
+                : ""}
             </v.btnParent>
             <Link to="/login" style={{display:"none"}} id="goto_home">login</Link>
         </v.viewMain>

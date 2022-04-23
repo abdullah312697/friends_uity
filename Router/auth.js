@@ -176,11 +176,11 @@ router.post("/login", async(req, res) => {
                         res.status(200).cookie('accessToken', accessToken,
 
                             {
-                                sameSite: 'none',
                                 path: '/',
                                 maxAge: 1647528321,
                                 httpOnly: true,
-                                secure: true
+                                secure: true,
+                                sameSite: 'none'
                             }
 
                         ).json("successfull");
