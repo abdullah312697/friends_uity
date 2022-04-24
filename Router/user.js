@@ -109,13 +109,11 @@ router.post("/phistory", async(req, res) => {
 //</get monthlyData>
 //<get pament History>
 
-router.post("/getPhistory/:id", async(req, res) => {
-
+router.get("/getPhistory", async(req, res) => {
     try {
 
-        if (req.user.id === req.params.id) {
-            const fdata = await model.Paydate.find({ payerId: req.params.id, payForYear: req.body.year }).sort({ monthNumbr: 1 });
-
+        if (req.query.id !== undefined) {
+            const fdata = await model.Paydate.find({ payerId: req.query.id, payForYear: req.query.year }).sort({ monthNumbr: 1 });
             if (fdata) {
                 res.status(200).json(fdata);
             }

@@ -75,7 +75,7 @@ const Header = () => {
     return(
         <H.Mainsection>
         <H.DesktopHeader className="desktopHeader">
-            <H.Logo src={logo}></H.Logo>
+            <Link to="/home"><H.Logo src={logo}></H.Logo></Link>
             <H.Title>The Friends Unity Association</H.Title>
             <H.Nabbar>
                   <H.Nabbarlist>

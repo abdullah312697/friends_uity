@@ -66,8 +66,8 @@ export const HStyle = {
 
 
     Logo: styled.img `
-    width: 80px;
-    height: 79px;
+    width: 70px;
+    height: 70px;
     margin-left: 10px;
      `,
 
@@ -1278,10 +1278,10 @@ export const voucherStyle = {
         padding: 25px;
     `,
     DataShow: styled.div `
-        color: #ff0052,
-        fontSize: 28px,
-        textAlign: center,
-        display: block
+        color: #ff0052;
+        font-size: 28px;
+        text-align: center;
+        display: block;
     `,
     voucherHeadr: styled.div `
         margin: 50px 0px;

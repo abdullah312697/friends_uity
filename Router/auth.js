@@ -180,7 +180,7 @@ router.post("/login", async(req, res) => {
                                 maxAge: 1647528321,
                                 httpOnly: true,
                                 secure: true,
-                                sameSite: 'none'
+                                sameSite: 'strict'
                             }
 
                         ).json("successfull");

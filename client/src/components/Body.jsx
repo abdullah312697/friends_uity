@@ -276,6 +276,8 @@ useEffect(() => {
 
 
     };
+
+
     /* jshint ignore:start */ 
     return(
         <B.mainParent>
@@ -312,10 +314,9 @@ useEffect(() => {
                     :
                 <B.Allamount>
                     {
-                        <B.AlluserATitle>
+                        <B.AlluserATitle id="childElement">
                             Our Total Amount {showAmout.amount} Taka
                         </B.AlluserATitle>
-
                     }
                         {
                         authUser.isAdmin === true || authUser.isEditor === true ?
@@ -331,13 +332,32 @@ useEffect(() => {
                 </B.TotalMember>
             </B.MainFirst>
 
-                <B.Allamount className="mobileTitel">
-                        <B.AlluserATitle className="mobileHTitle">
+                {
+                    Object.keys(showAmout).length === 0 ?
+                    <B.Allamount className="mobileTitel">
+
+                    <B.AlluserATitle className="mobileHTitle">
+                        Amount Loading...
+                    </B.AlluserATitle>
+                    </B.Allamount>
+
+                    :
+
+                    <B.Allamount className="mobileTitel">
+
+                        <B.AlluserATitle className="mobileHTitle" id="mobileTamout">
                             Total Amount {showAmout.amount} Taka
                         </B.AlluserATitle>
-                        <Link to="/updateAmount" className="hrefAmount">Update</Link>
 
-                </B.Allamount>
+                        {
+                        authUser.isAdmin === true || authUser.isEditor === true ?
+                            <Link to="/updateAmount" className="hrefAmount">Update</Link>  : ""
+                        }
+
+                        </B.Allamount>
+
+                            }      
+
 
         <B.InnerSecond>
 

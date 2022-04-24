@@ -34,8 +34,12 @@ const Voucher = () => {
         useEffect(() => {
                 const getLate = async () => {
                     let path = window.location.pathname.split('/')[2];
-
-                   await axiosInst.post("users/getPhistory/" + path, {year: showYear} ).then(res => {
+                   await axiosInst.get("users/getPhistory/",{
+                    params:{
+                        id:path,
+                        year:showYear
+                   }
+                }).then(res => {
                        if(res.status === 200){
                             setUserData(res.data);
                        }
