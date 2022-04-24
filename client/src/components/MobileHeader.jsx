@@ -72,13 +72,14 @@ const MobileHeader = () => {
     return(
         <H.MobileHeadr>
             <H.HeadSecOne>
-                <H.Logo src={logo} className="mobleLogo"></H.Logo>
+                <Link to="/home">
+                    <H.Logo src={logo} className="mobleLogo"></H.Logo>
+                </Link>
                 <H.Title className="mobleTitle">The Friends Unity Association</H.Title>
                 {userData.isAdmin === true || userData.isEditor === true ?
-                    <Link to="/confirm" className="notifyBtn" id="confirm"><H.showNnum>{userNotify.length === 0 ? "" : userNotify.length}</H.showNnum><NotificationsNoneSharpIcon style={{color:"#a9ff00"}} /></Link>
+                    <Link to="/confirm" className="notifyBtn" id="confirm" style={{position:"relative"}}><H.showNnum>{userNotify.length === 0 ? "" : userNotify.length}</H.showNnum><NotificationsNoneSharpIcon style={{color:"#a9ff00"}} /></Link>
                         : ""
                 }
-
                 <H.MenuIconShow>
                     <MenuIcon onClick={showMenu} id="showMuneIcon"/>
                 </H.MenuIconShow>

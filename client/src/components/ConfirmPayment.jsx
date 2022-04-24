@@ -48,9 +48,10 @@ const ConfirmPament = () => {
 
     
     const confirmPay = async(e) => {
-        const ConId = e.target.id;
-        await axiosInst.put("users/updatePay/"+ConId).then(res => {
-            setCondata(res.data);
+        await axiosInst.put("users/updatePay/"+e.target.id).then(res => {
+            if(res.status === 200){
+                setCondata(res.data);
+            }
         }).catch(e => {
             console.log(e);
         });

@@ -424,7 +424,7 @@ useEffect(() => {
                                     <B.UserName>{d.payerName}</B.UserName>
                                         <B.userPayment>
                                         
-                                        { d.paymentSuccess === false ? <B.userUnPade>Pending</B.userUnPade> : <B.userPade>Pade</B.userPade>}
+                                        { d.paymentSuccess === false ? <B.userUnPade>{"Pending"}</B.userUnPade> : <B.userPade>{"Pade"}</B.userPade>}
                                         </B.userPayment>
                                 </B.AlluserDataShow>                    
                     )}
@@ -432,7 +432,7 @@ useEffect(() => {
 
             <B.mainSecond>
                 <B.Monthp>
-                    <B.Mnheading>Users {userData.length - 1}</B.Mnheading>
+                    <B.Mnheading>Users {userData.length === 0 ? "" : (userData.length - 1)}</B.Mnheading>
                 </B.Monthp>
                 <B.userPerents>
                 { 

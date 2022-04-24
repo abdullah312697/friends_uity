@@ -198,6 +198,7 @@ export const HStyle = {
             display:none;
         }
 
+    
     `,
     borderbtm: styled.div `
         width: 100%;
@@ -215,8 +216,8 @@ export const HStyle = {
     color: #a9ff00;
 
     @media only screen and (max-width:768px){
-        top: 5px;
-        right: 69px;    
+        top: -19px;
+        right: 8px;    
     }
      `,
     UserSimg: styled.img `
@@ -640,7 +641,7 @@ export const Bodystyle = {
     width: 125px;
     display: block;
     margin: -29px -60px 0px 0px;
-    
+    box-sizing: border-box;
     `,
     userPade: styled.div `
     color: #00ff5b;
