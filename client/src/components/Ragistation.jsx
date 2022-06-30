@@ -7,8 +7,6 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import app from './../Firebase';
 import {Link} from 'react-router-dom';
 import {axiosInst} from './../altaxios';
-import axios from 'axios';
-axios.defaults.withCredentials = true;
 
 const Ragistation = () => {
     var Item = 0;

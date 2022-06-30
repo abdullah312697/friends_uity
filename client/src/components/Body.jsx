@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {axiosInst} from './../altaxios';
+import { deleteObject } from "firebase/storage";
 
 const Body = () => {
     const Cyear = new Date().getFullYear();
@@ -22,6 +23,13 @@ useEffect(() =>{
         const getLate = async () => {
             await axiosInst.get("users/findRguser").then(res => {
                 res.data.map(async (d) => {
+                    if(d.profile !== undefined){
+                        deleteObject(d.profile).then(() => {
+                            console.log("File deleted successfully");
+                          }).catch((error) => {
+                            console.log(error);
+                          });
+                    }
                     await axiosInst.delete("users/delete/"+d._id).then(res => {
                         if(isMounted){
                             console.log(res.data);
